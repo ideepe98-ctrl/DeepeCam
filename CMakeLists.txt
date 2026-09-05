@@ -7,7 +7,7 @@ add_executable(DeepeCamTest
 )
 
 add_library(DeepeCamMediaSource SHARED
-    src/MediaSource/DeepeCamMediaSource.cpp
+    src/DeepeCamMediaSource.cpp
     src/MediaSource/DeepeCamMediaStream.cpp
     src/MediaSource/DeepeCamFactory.cpp
     src/MediaSource/DeepeCamClassFactory.cpp
