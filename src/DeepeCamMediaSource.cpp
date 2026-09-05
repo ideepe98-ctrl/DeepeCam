@@ -1,14 +1,14 @@
-#include "DeepeCamMediaStream.h"
+#include "DeepeCamMediaSource.h"
 
-DeepeCamMediaStream::DeepeCamMediaStream()
+DeepeCamMediaSource::DeepeCamMediaSource()
 {
 }
 
-DeepeCamMediaStream::~DeepeCamMediaStream()
+DeepeCamMediaSource::~DeepeCamMediaSource()
 {
 }
 
-STDMETHODIMP DeepeCamMediaStream::QueryInterface(
+STDMETHODIMP DeepeCamMediaSource::QueryInterface(
     REFIID riid,
     void** ppv)
 {
@@ -19,9 +19,9 @@ STDMETHODIMP DeepeCamMediaStream::QueryInterface(
 
     if (riid == IID_IUnknown ||
         riid == IID_IMFMediaEventGenerator ||
-        riid == IID_IMFMediaStream)
+        riid == IID_IMFMediaSource)
     {
-        *ppv = static_cast<IMFMediaStream*>(this);
+        *ppv = static_cast<IMFMediaSource*>(this);
         AddRef();
         return S_OK;
     }
@@ -29,13 +29,13 @@ STDMETHODIMP DeepeCamMediaStream::QueryInterface(
     return E_NOINTERFACE;
 }
 
-STDMETHODIMP_(ULONG) DeepeCamMediaStream::AddRef()
+STDMETHODIMP_(ULONG) DeepeCamMediaSource::AddRef()
 {
     return static_cast<ULONG>(
         InterlockedIncrement(&m_refCount));
 }
 
-STDMETHODIMP_(ULONG) DeepeCamMediaStream::Release()
+STDMETHODIMP_(ULONG) DeepeCamMediaSource::Release()
 {
     ULONG count = static_cast<ULONG>(
         InterlockedDecrement(&m_refCount));
@@ -46,28 +46,28 @@ STDMETHODIMP_(ULONG) DeepeCamMediaStream::Release()
     return count;
 }
 
-STDMETHODIMP DeepeCamMediaStream::GetEvent(
+STDMETHODIMP DeepeCamMediaSource::GetEvent(
     DWORD,
     IMFMediaEvent**)
 {
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::BeginGetEvent(
+STDMETHODIMP DeepeCamMediaSource::BeginGetEvent(
     IMFAsyncCallback*,
     IUnknown*)
 {
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::EndGetEvent(
+STDMETHODIMP DeepeCamMediaSource::EndGetEvent(
     IMFAsyncResult*,
     IMFMediaEvent**)
 {
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::QueueEvent(
+STDMETHODIMP DeepeCamMediaSource::QueueEvent(
     MediaEventType,
     REFGUID,
     HRESULT,
@@ -76,20 +76,41 @@ STDMETHODIMP DeepeCamMediaStream::QueueEvent(
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::GetMediaSource(
-    IMFMediaSource**)
+STDMETHODIMP DeepeCamMediaSource::GetCharacteristics(
+    DWORD* characteristics)
+{
+    if (!characteristics)
+        return E_POINTER;
+
+    *characteristics = MFMEDIASOURCE_IS_LIVE;
+    return S_OK;
+}
+
+STDMETHODIMP DeepeCamMediaSource::CreatePresentationDescriptor(
+    IMFPresentationDescriptor**)
 {
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::GetStreamDescriptor(
-    IMFStreamDescriptor**)
+STDMETHODIMP DeepeCamMediaSource::Start(
+    IMFPresentationDescriptor*,
+    const GUID*,
+    const PROPVARIANT*)
 {
     return E_NOTIMPL;
 }
 
-STDMETHODIMP DeepeCamMediaStream::RequestSample(
-    IUnknown*)
+STDMETHODIMP DeepeCamMediaSource::Stop()
 {
     return E_NOTIMPL;
+}
+
+STDMETHODIMP DeepeCamMediaSource::Pause()
+{
+    return E_NOTIMPL;
+}
+
+STDMETHODIMP DeepeCamMediaSource::Shutdown()
+{
+    return S_OK;
 }
