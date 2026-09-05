@@ -1,7 +1,8 @@
-#include <iostream>
+#include <windows.h>
+#include <mfapi.h>
+#include <mfvirtualcamera.h>
 
 int main()
 {
-    std::cout << "DeepeCamTest is running successfully." << std::endl;
     return 0;
 }
