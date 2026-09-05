@@ -1,22 +1,7 @@
-#include <windows.h>
+#include <iostream>
 
-int WINAPI wWinMain(
-    HINSTANCE hInstance,
-    HINSTANCE hPrevInstance,
-    PWSTR pCmdLine,
-    int nCmdShow)
+int main()
 {
-    (void)hInstance;
-    (void)hPrevInstance;
-    (void)pCmdLine;
-    (void)nCmdShow;
-
-    MessageBoxW(
-        nullptr,
-        L"DeepeCamTest is running successfully.",
-        L"DeepeCam Test",
-        MB_OK | MB_ICONINFORMATION
-    );
-
+    std::cout << "DeepeCamTest is running successfully." << std::endl;
     return 0;
 }
