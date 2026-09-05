@@ -1,5 +1,6 @@
 #include <windows.h>
 #include "DeepeCamClassFactory.h"
+#include <new>
 
 static long g_objectCount = 0;
 
